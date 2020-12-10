@@ -25,6 +25,14 @@ For this project you will
 Use a graphical tool like `SQLite Studio` to open `./data/northwind.db3` and execute the following queries:
 
 - Display the ProductName and CategoryName for all products in the database. Returns 77 records.
+  ----------------------
+select 
+    p.productname,
+    c.categoryname
+from category c --left table
+join product p
+    on c.id = p.categoryid
+  -----------------------
 - Display the order Id and shipper CompanyName for all orders placed before August 9 2012. Returns 429 records.
 - Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Returns 3 records.
 - Display the OrderID, customer's Company Name and the employee's Last Name for every order. All columns should be labeled clearly. Returns 16,789 records.
@@ -33,26 +41,26 @@ Use a graphical tool like `SQLite Studio` to open `./data/northwind.db3` and exe
 
 Write helpers methods in `./schemes/scheme-model.js` that match the following specifications:
 
-- `find()`:
+- `find()`: ******
   - Calling find returns a promise that resolves to an array of all schemes in the database.
   - No steps are included.
-- `findById(id)`:
+- `findById(id)`: ******
   - Expects a scheme `id` as its only parameter.
   - Resolve to a _single_ scheme object.
   - On an invalid `id`, resolves to `null`, perhaps by doing `if (!schemaObject) return Promise.resolve(null)`.
-- `findSteps(id)`:
+- `findSteps(id)`: ******
   - Expects a scheme `id`.
   - Resolves to an array of all correctly ordered step for the given scheme: `[ { id: 17, scheme_name: 'Find the Holy Grail', step_number: 1, instructions: 'quest'}, { id: 18, scheme_name: 'Find the Holy Grail', step_number: 2, instructions: '...and quest'}, etc. ]`.
   - This array should include the `scheme_name` _not_ the `scheme_id`.
-- `add(scheme)`:
+- `add(scheme)`: ******
   - Expects a scheme object.
   - Inserts scheme into the database.
   - Resolves to the newly inserted scheme, including `id`.
-- `update(changes, id)`:
+- `update(changes, id)`: ***
   - Expects a changes object and an `id`.
   - Updates the scheme with the given id.
   - Resolves to the newly updated scheme object.
-- `remove(id)`:
+- `remove(id)`: ******
   - Removes the scheme object with the provided id.
   - Resolves to the removed scheme
   - Resolves to `null` on an invalid id.
@@ -82,7 +90,7 @@ The following endpoints are available to test the functionality of the model met
 - `GET /api/schemes/:id` - gets a single scheme
 - `GET /api/schemes/:id/steps` - gets all steps for a given scheme, ordered correctly
 - `POST /api/schemes` - adds a new scheme
-- `PUT /api/schemes:id` - updates a given scheme
+- `PUT /api/schemes/:id` - updates a given scheme
 - `DELETE /api/schemes/:id` - removes a given scheme and all associated steps
 
 ### Task 3: Stretch Problems
